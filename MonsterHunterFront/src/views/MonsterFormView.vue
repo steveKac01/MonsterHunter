@@ -88,6 +88,7 @@
 <script>
 
 import axios from "axios";
+//import { Form, Field } from 'vee-validate';
 
 export default {
   name: "MonsterFormView",
@@ -166,7 +167,7 @@ this.form.agro = false
 
     
     }else{
-        console.log("walou")
+        console.log("rien")
     }
 }
 };

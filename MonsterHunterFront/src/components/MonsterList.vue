@@ -1,21 +1,27 @@
 <template>
   <div>
-    <div class="list-intro">Notre wikki possède actuellement {{ monsters.length }} monstres, WOW !</div>
+    <div class="list-intro">Notre wikki possède actuellement {{ monsters.length }} monstres, {{ unbielievable[Math.floor(Math.random()* unbielievable.length)] }} !</div>
     <div class="new" v-if="displayAdmin == true" @click="goToForm()">Créer un nouveau monstre ➕</div>
     <div class="list">
       <table class="styled-table">
         <thead>
           <tr>
-            <th>Icone</th>
+            <th></th>
             <th style="cursor:pointer" @click="sortByName()">
-              {{
-                this.orderBy=="name"?  this.byName ? '+' : '-' :''  }} Name
+              <font-awesome-icon v-if="this.orderBy == 'name' && this.byName" icon="fa-circle-arrow-down" />
+              <font-awesome-icon v-if="this.orderBy == 'name' && !this.byName" icon="fa-circle-arrow-up" />
+              Name
             </th>
-            <th style="cursor:pointer" @click="sortByNickName()">{{
-                this.orderBy=="nickName"?  this.byNickname ? '+' : '-' :''  }} Nickname</th>
+            <th style="cursor:pointer" @click="sortByNickName()">
+              <font-awesome-icon v-if="this.orderBy == 'nickName' && this.byNickname" icon="fa-circle-arrow-down" />
+              <font-awesome-icon v-if="this.orderBy == 'nickName' && !this.byNickname" icon="fa-circle-arrow-up" />
+              Nickname
+            </th>
             <th style="cursor:pointer" @click="sortBySpecie()">
-              {{
-                this.orderBy=="specie"?  this.bySpecie ? '+' : '-' :''  }} Espèce</th>
+              <font-awesome-icon v-if="this.orderBy == 'specie' && this.bySpecie" icon="fa-circle-arrow-down" />
+              <font-awesome-icon v-if="this.orderBy == 'specie' && !this.bySpecie" icon="fa-circle-arrow-up" />
+              Espèce
+            </th>
             <th colspan="2">Element</th>
             <th colspan="2">Faiblesse</th>
           </tr>
@@ -29,17 +35,13 @@
             <th>{{ monster.nickname }}</th>
             <th>{{ monster.specie }}</th>
             <th>
-              <img
-                :src="require(`../assets/element/${monster.element.toLowerCase()}.png`)"
-                v-if="monster.element != ''"
-              />
+              <img :src="require(`../assets/element/${monster.element.toLowerCase()}.png`)"
+                v-if="monster.element != ''" />
             </th>
             <th>{{ monster.element }}</th>
             <th>
-              <img
-                :src="require(`../assets/element/${monster.weakagainst.toLowerCase()}.png`)"
-                v-if="monster.weakagainst != ''"
-              />
+              <img :src="require(`../assets/element/${monster.weakagainst.toLowerCase()}.png`)"
+                v-if="monster.weakagainst != ''" />
             </th>
             <th colspan="2">{{ monster.weakagainst }}</th>
             <th v-if="displayAdmin == true">
@@ -49,8 +51,7 @@
           </tr>
         </tbody>
       </table>
-    </div>
-  </div>
+    </div>  </div>
 </template>
 
 <script>
@@ -59,12 +60,13 @@ import axios from "axios";
 export default {
   name: "MonsterList",
   data: () => ({
+    unbielievable: ["WOW","FANTASTIQUE","INCROYABLE","IMPOSSIBLE","EXTRAORDINAIRE","IMPENSABLE"],
     monsters: {},
     monstera: {},
     orderBy: "name",
     byName: true,
     byNickname: false,
-    bySpecie:false
+    bySpecie: false
   }),
   props: {
     displayAdmin: {
@@ -88,7 +90,7 @@ export default {
       this.byName ? this.byName = false : this.byName = true
 
       if (this.byName) {
-        
+
         this.monsters.sort(function (a, b) {
           var textA = a.name.toUpperCase();
           var textB = b.name.toUpperCase();
@@ -101,15 +103,15 @@ export default {
           return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
         })
       }
-    }, 
+    },
     sortByNickName() {
       this.orderBy = "nickName"
       this.byNickname ? this.byNickname = false : this.byNickname = true
 
       if (this.byNickname) {
-        
+
         this.monsters.sort(function (a, b) {
-          var textA = a.nickname .toUpperCase();
+          var textA = a.nickname.toUpperCase();
           var textB = b.nickname.toUpperCase();
           return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
         })
@@ -126,9 +128,9 @@ export default {
       this.bySpecie ? this.bySpecie = false : this.bySpecie = true
 
       if (this.bySpecie) {
-        
+
         this.monsters.sort(function (a, b) {
-          var textA = a.specie .toUpperCase();
+          var textA = a.specie.toUpperCase();
           var textB = b.specie.toUpperCase();
           return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
         })
@@ -140,6 +142,7 @@ export default {
         })
       }
     },
+
     goToMonster(monsterId) {
       this.$router.push({ name: 'detail', params: { monsterId } })
     },
@@ -169,18 +172,22 @@ export default {
 img {
   width: 50px;
 }
+
 tbody tr {
   cursor: pointer;
 }
+
 .new {
   margin-top: 20px;
   cursor: pointer;
   color: black;
 }
+
 .list {
   display: flex;
   justify-content: center;
 }
+
 .styled-table {
   border-collapse: collapse;
   margin: 25px 0;
@@ -194,10 +201,12 @@ tbody tr {
   background-color: #009879;
   color: #fff;
 }
+
 .styled-table th,
 .styled-table td {
   padding: 12px 15px;
 }
+
 .styled-table tbody tr {
   border-bottom: 1px solid #dddddd;
   color: black;
@@ -215,6 +224,7 @@ tbody tr {
   font-weight: bold;
   color: #009879;
 }
+
 .list-intro {
   background-color: #006b56;
   padding: 20px 0;

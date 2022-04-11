@@ -1,7 +1,8 @@
 <template>
   <div class="footer">
    <footer>
-  <div><img :src="require(`/src/assets/img/logo.webp`)"  alt=""></div>
+        <div class="logo" @click="goToHome()"><img :src="require(`/src/assets/img/logo.webp`)" alt="logo"></div>
+
   <div><router-link to="/list">Informations privées </router-link></div>
   <div><div><h4> Navigation</h4></div> 
   <div>    <router-link to="/">Accueil </router-link></div>
@@ -17,7 +18,13 @@
 
 <script>
 export default {
-  name: 'FooterCompo'
+  name: 'FooterCompo',
+    methods:{
+    goToHome()
+    {
+      this.$router.push({name:"home"})
+    }
+  }
 }
 </script>
 
@@ -57,5 +64,11 @@ h4{
 background-color: #42b983;
 color:white;
 
+}
+footer >div:nth-of-type(2),footer >div:nth-of-type(3){
+  border-left: #42b983 1px solid;
+}
+.logo{
+  cursor: pointer;
 }
 </style>

@@ -41,6 +41,7 @@ return "http://triathlondegerardmer.com/wp-content/uploads/2019/02/no-image.jpg"
 async created(){
 const dataMonsters = await axios.get("http://localhost:15000/random");
     this.monsters = dataMonsters.data;
+   
 }
 }
 </script>
@@ -67,7 +68,7 @@ background-color: white;
 display: grid;
 grid-template-columns: repeat(2, 1fr);
 grid-template-rows: repeat(2, 1fr);
-grid-column-gap: 50px;
+grid-column-gap: 20px;
 grid-row-gap: 50px;
 
 }
@@ -84,7 +85,11 @@ background-color: #009879;
 color:white;
 }
 
-
+figcaption{
+  background-color: black;
+  color: white;
+  padding: 10px 0;
+}
 img{
   width: 60%;
 }

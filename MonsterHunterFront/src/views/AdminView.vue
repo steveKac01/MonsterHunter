@@ -1,6 +1,6 @@
 <template>
   <div class="admin">
-    <MonsterList :displayAdmin="true"/>
+    <MonsterList :displayAdmin="this.isAdmin"/>
   </div>
 </template>
 
@@ -11,14 +11,20 @@ import MonsterList from "/src/components/MonsterList.vue";
 export default {
   name: 'AdminView',
 data:()=>({
-isAdmin: true
+isAdmin: false
 }),
 methods:{
 
 },
 components:{
       MonsterList,
+  },
+  created(){
+localStorage.getItem('connected')!=null
+  ? this.isAdmin=true
+  : this.isAdmin=false;
   }
+  
 }
 </script>
 

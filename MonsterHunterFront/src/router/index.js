@@ -28,6 +28,18 @@ const routes = [{
             import ('../views/AdminView.vue')
     },
     {
+        path: '/login',
+        name: 'login',
+        component: () =>
+            import ('../views/loginView.vue')
+    },
+    {
+        path: '/register',
+        name: 'register',
+        component: () =>
+            import ('../views/registerView.vue')
+    },
+    {
         path: '/form',
         name: 'form',
         component: () =>
