@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Dao\MonsterDao;
-use Error;
+
 
 class MainController
 {
@@ -135,9 +135,7 @@ class MainController
         //get random ids
         $dao = new MonsterDao();
         $dataId = $dao->getAllIdMonster();
-         
-
-        
+                 
         $idRaw= array_rand($dataId,NUMBER_OF_RANDOM_MONSTERS);    
         $idSelected = [];
 
@@ -145,11 +143,9 @@ class MainController
         array_push($idSelected,$dataId[$idRaw[$i]]["id"]);
         }
        
-
         header("Access-Control-Allow-Origin: *");
         header("Content-Type: application/json");
-        
-        
+                
         $dao = new MonsterDao();
 
         $dataRaw = $dao->getRandomMonsters($idSelected);
