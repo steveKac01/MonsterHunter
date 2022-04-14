@@ -18,7 +18,7 @@
           <h4><span>Faiblesse: </span> {{ monster.weakagainst }}</h4>
           <h4><span>Taille: </span> {{ monster.lengthmin }} - {{ monster.lengthmax }}</h4>
           <h4><span>Génération: </span>{{ monster.generation }}</h4>
-          <h4 v-if="monster.agro == true" class="agressive">Aggresif</h4>
+          <h4 v-if="monster.agro == true" class="agressive">Agressif</h4>
           <h4 v-if="monster.agro != true" class="passive">Passif</h4>
           <p>{{ monster.description }}</p>
         </div>
@@ -57,7 +57,7 @@ console.log(this.monster)
 
 
     goBackToListing() {
-      this.$router.push({ name: "list" })
+      this.$router.push({ name: "admin" })
     },
     getImgUrl(monsterName) {
       try {

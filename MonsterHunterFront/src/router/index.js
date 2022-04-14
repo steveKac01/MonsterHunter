@@ -10,12 +10,6 @@ const routes = [{
         component: HomeView
     },
     {
-        path: '/list',
-        name: 'list',
-        component: () =>
-            import ('../views/ListView.vue')
-    },
-    {
         path: '/detail/:monsterId',
         name: 'detail',
         component: () =>
@@ -49,7 +43,13 @@ const routes = [{
         name: 'formEdit',
         component: () =>
             import ('../views/MonsterFormView.vue')
-    }
+    },
+     {
+         path: '/test',
+         name:'test',
+         component:()=>
+         import('../views/TestView.vue')
+     }
 ]
 
 const router = new VueRouter({

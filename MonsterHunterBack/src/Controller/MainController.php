@@ -9,7 +9,9 @@ class MainController
 {
     function getMonsters()
     {
+        header("Access-Control-Allow-Methods: PUT");
         header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Headers: *");
         header("Content-Type: application/json");
         $dao = new MonsterDao();
         $dataRaw = $dao->getMonsters();

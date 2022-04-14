@@ -25,8 +25,8 @@
       </div>
       <div class="links">
         <router-link to="/">Accueil </router-link> |
-        <router-link to="/list"> Monstres </router-link>
-        <router-link v-if="isConnected()" to="/admin"> | Admin</router-link>
+        <router-link to="/admin"> Monstres </router-link>
+       <!-- <router-link v-if="isAdmin()" to="/admin"> | Admin</router-link>-->
       </div>
     </nav>
 
@@ -56,9 +56,10 @@ export default {
       this.$router.push({ name: "home" })
     },logOut(){
 
-        localStorage.removeItem('connected');
-        localStorage.removeItem('username');
-        localStorage.removeItem('token');
+       // localStorage.removeItem('connected')
+        localStorage.removeItem('username')
+        localStorage.removeItem('token')
+        localStorage.removeItem('isAdmin')
 
 
         this.$router.go()
@@ -69,10 +70,18 @@ export default {
     },
     isConnected()
     {
-     if(localStorage.getItem('connected')!=null)
-     {       console.log("je suis co")
+     if(localStorage.getItem('username')!=null && localStorage.getItem('token')!=null)
+     {       
        return true
-
+     }else{
+       return false
+     }
+    },
+    isAdmin()
+    {
+  if(localStorage.getItem('isAdmin')==1)
+     {
+       return true 
      }else{
        return false
      }

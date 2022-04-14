@@ -20,8 +20,8 @@ if (!empty($user)) {
   $data =  $dao->logUser($user);
 
   $userController =new UserController();
-  $jwt =  $userController->getJWT($data["username"]);
-  echo  json_encode($data+$jwt); // zarb ca marche ^^"
+  $jwt =  $userController->getJWT($data);
+ echo  json_encode($data+$jwt); // zarb ca marche ^^"
  
   
 }

@@ -1,8 +1,20 @@
 <template>
   <div>
-    <div class="list-intro">Notre wikki possède actuellement {{ monsters.length }} monstres, {{ unbielievable[Math.floor(Math.random()* unbielievable.length)] }} !</div>
-    <div class="new" v-if="displayAdmin == true" @click="goToForm()">Créer un nouveau monstre ➕</div>
+    <div class="list-intro">Notre wikki possède actuellement {{ monstera.data.length }} monstres, {{
+      unbielievable[Math.floor(Math.random() * unbielievable.length)]
+    }} !</div>
+    <div class="new" v-if="displayAdmin == true">Créer un nouveau monstre<span @click="goToForm()"> ➕</span></div>
+    <div class="filter">
+
+      <input type="checkbox" @change="filterAgro" checked v-model="isChecked" id="agro" />
+      <label for="agro"> Monstres Agressifs</label>
+
+
+
+
+    </div>
     <div class="list">
+
       <table class="styled-table">
         <thead>
           <tr>
@@ -51,7 +63,8 @@
           </tr>
         </tbody>
       </table>
-    </div>  </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -60,13 +73,15 @@ import axios from "axios";
 export default {
   name: "MonsterList",
   data: () => ({
-    unbielievable: ["WOW","FANTASTIQUE","INCROYABLE","IMPOSSIBLE","EXTRAORDINAIRE","IMPENSABLE"],
+    unbielievable: ["WOW", "FANTASTIQUE", "INCROYABLE", "IMPOSSIBLE", "EXTRAORDINAIRE", "IMPENSABLE"],
     monsters: {},
     monstera: {},
     orderBy: "name",
     byName: true,
     byNickname: false,
-    bySpecie: false
+    bySpecie: false,
+    isChecked: true,
+
   }),
   props: {
     displayAdmin: {
@@ -75,14 +90,23 @@ export default {
     }
   },
   methods: {
+    filterAgro() {
+      if (this.isChecked) {
+        this.monsters = this.monstera.data;
+      } else {
+
+        this.monsters = this.monstera.data.filter((elem) => {
+          return (elem.agro === 0)
+        })
+
+      }
+    },
     getImgUrl(monsterName) {
       try {
         return require(`../assets/icone/${monsterName}.png`)
       } catch {
 
         return "http://triathlondegerardmer.com/wp-content/uploads/2019/02/no-image.jpg"
-
-
       }
     },
     sortByName() {
@@ -153,17 +177,28 @@ export default {
       this.$router.push({ name: 'formEdit', params: { monsterId } })
     },
     async deleteMonster(monster) {
+      let header = { "Authorization": localStorage.getItem('token') };
+      await axios.post("http://localhost:15000/delete.php", { id: monster }, { headers: header }) //FU alto router
 
-      await axios.post("http://localhost:15000/delete.php", { id: monster }) //FU alto router
-
-      this.$router.go() //reload same page if no argument specified
+      this.$router.go() //reload the page
     }
   },
   async created() {
-    this.monstera = await axios.get("http://localhost:15000/monsters.php");
 
-    this.monsters = this.monstera.data;
-    console.log(this.monsters);
+    if (this.displayAdmin) {
+      let header = { "Authorization": localStorage.getItem('token') };
+      this.monstera = await axios.get("http://localhost:15000/monsters.php", { headers: header });
+    } else {
+      this.monstera = await axios.get("http://localhost:15000/monsters.php");
+    }
+
+    if (this.monstera.data != "") {
+      this.monsters = this.monstera.data;
+      console.log("admin page loaded");
+    }
+    else {
+      this.$router.push({ name: "home" })
+    }
   },
 };
 </script>
@@ -179,8 +214,12 @@ tbody tr {
 
 .new {
   margin-top: 20px;
-  cursor: pointer;
   color: black;
+}
+
+.new>span {
+  cursor: pointer;
+
 }
 
 .list {
@@ -228,5 +267,12 @@ tbody tr {
 .list-intro {
   background-color: #006b56;
   padding: 20px 0;
+}
+
+.filter {
+  text-align: right;
+  color: black;
+  padding:  10px 20px 0 0;
+
 }
 </style>

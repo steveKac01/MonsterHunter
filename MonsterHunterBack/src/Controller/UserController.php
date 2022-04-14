@@ -16,21 +16,22 @@ class UserController
 
         $secretKey  = NOT_SO_SECRET_KEY;
         $issuedAt   = new DateTimeImmutable();
-        $expire     = $issuedAt->modify('+2 hours')->getTimestamp();      // Ajoute 60 secondes
+        $expire     = $issuedAt->modify('+2 days')->getTimestamp();      
         $serverName = "localhost";
-        $username   = $user;                                           // Récupéré à partir des données POST filtré
+        $username   = $user;   // Récupéré à partir des données POST filtré (oupas)
 
     $data = [
-    'iat'  => $issuedAt->getTimestamp(),         // Issued at:  : heure à laquelle le jeton a été généré
-    'iss'  => $serverName,                       // Émetteur
-    'nbf'  => $issuedAt->getTimestamp(),         // Pas avant..
-    'exp'  => $expire,                           // Expiration
-    'userName' => $username,                     // Nom d'utilisateur
+    'iat'  => $issuedAt->getTimestamp(),         
+    'iss'  => $serverName,                      
+    'nbf'  => $issuedAt->getTimestamp(),        
+    'exp'  => $expire,                           
+    'userName' => $user["username"],    
+    'isAdmin' =>$user["isAdmin"]                 // Nom d'utilisateur
     ];
 
 return ["token"=>JWT::encode(
     $data,
-    $secretKey,
+    "FDP)éeçMDLQLDplzddPDLZàç°)=+DZ.DZAsdsdDZDDzd",
     'HS512'
 )];
 

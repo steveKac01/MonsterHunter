@@ -1,7 +1,7 @@
 <template>
   <div class="homea">
 
-<div class="random-intro"><h2>LES MONSTRES DU JOUR</h2></div>
+<div class="random-intro"><h2>CREATURES ALEATOIRES</h2></div>
     <div class="random-container">
 
 <div v-for="monster in monsters" :key="monster.id" @click="goToMonster(monster.id)"><figure><img :src="getImgUrl(monster.name)" alt=""><figcaption>{{monster.name}}</figcaption></figure></div>

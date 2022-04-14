@@ -1,12 +1,12 @@
 <?php
 
 use App\Controller\{MainController,UserController};
-
+/*
 $router->map("GET", "/monsters", function () {
     $mainController = new MainController();
     $mainController->getMonsters();
 });
-
+*/
 
 $router->map("GET", "/monster/[i:id]", function ($id) {
 

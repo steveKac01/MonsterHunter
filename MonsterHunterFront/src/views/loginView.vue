@@ -4,13 +4,13 @@
             <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
             <form name="form" @submit.prevent="letsGo()">
                 <div class="form-group">
-                    <label for="username">Email</label>
-                    <input v-validate="'required|min:3|max:20'" v-model="form.email" type="email" class="form-control" name="username" />
+                    <label for="email">Email</label>
+                    <input v-model="form.email" type="email" class="form-control" id="email" name="username" />
 
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" name="password" v-model="form.password" />
+                    <input type="password"  autocomplete="new-password" class="form-control" id="password" name="password" v-model="form.password" />
 
                 </div>
                 <div class="form-group">
@@ -23,45 +23,54 @@
                     <div v-if="message" class="alert alert-danger" role="alert">{{ message }}</div>
                 </div>
             </form>
-        </div>  </div>
+        </div>
+    </div>
 </template>
 <script>
 import axios from 'axios';
 
 export default {
     name: 'LoginView',
-    data() {
-        return {
+    data: () => ({
+        
             form: {
                 email: '',
                 password: ''
             },
             loading: false,
             message: ''
-        };
-    },
+        
+    }),
     created() {
-        if (localStorage.getItem("connected") != null) {
+        if (localStorage.getItem("token") != null) {
             this.$router.push({ name: "home" })
         }
     },
     methods: {
-       async letsGo() {
-            console.log("connect !")
-          
-          const test =await axios.post("http://localhost:15000/signIn.php",this.form)
-console.log(test)
-          if(test.data["username"]!=undefined){
-          
-          localStorage.setItem("connected", true)
-           
-            localStorage.setItem("username", test.data["username"])
-            localStorage.setItem("token", test.data["token"])
+        async letsGo() {
+            //Doit valider deux étapes
 
-            this.$router.go()
-          }
-        
+            if (this.validateEmail() && this.validatePassword()) {
+                const test = await axios.post("http://localhost:15000/signIn.php", this.form)
+
+                if (test.data["username"] != undefined) {
+
+                    localStorage.setItem("username", test.data["username"])
+                    localStorage.setItem("token", test.data["token"])
+                    localStorage.setItem("isAdmin", test.data["isAdmin"])
+                    this.$router.go()
+                }
+            }
+        }, validateEmail() {
+            if (this.form.email != "") {
+                console.log(this.form.email) //todo
+            }
+            return true;
+        },
+        validatePassword() {
+            return true;
         }
+
     }
 };
 </script>

@@ -20,11 +20,11 @@ components:{
       MonsterList,
   },
   created(){
-localStorage.getItem('connected')!=null
+
+localStorage.getItem('isAdmin')==1
   ? this.isAdmin=true
   : this.isAdmin=false;
   }
-  
 }
 </script>
 
