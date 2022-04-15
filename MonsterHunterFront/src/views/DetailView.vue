@@ -69,7 +69,7 @@ console.log(this.monster)
   },
   async created() {
     let monster = await axios.get(
-      "http://localhost:15000/monster/" + this.$route.params.monsterId
+      "http://dhqm1449.odns.fr/steve/MonsterHunterBack/public/detail.php?id=" + this.$route.params.monsterId
     );
     this.monster = monster.data;
   },

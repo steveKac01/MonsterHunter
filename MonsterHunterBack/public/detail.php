@@ -1,19 +1,20 @@
 <?php
+ini_set("display_errors",1);
 
-namespace App\Controller;
+require_once(implode(DIRECTORY_SEPARATOR,["..","vendor","autoload.php"]));
+require_once(implode(DIRECTORY_SEPARATOR,["..","config","setup.php"]));
 
 use App\Dao\MonsterDao;
 
-
-
-
-
+header("Access-Control-Allow-Methods: GET");
 header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: *");
 header("Content-Type: application/json");
 
-$idMonster = json_decode(file_get_contents('php://input'), true);
+(int)$idMonster = $_GET["id"];
 
 $dao = new MonsterDao();
 $dataRaw = $dao->getMonsterById($idMonster);
-
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json");
 echo json_encode($dataRaw);

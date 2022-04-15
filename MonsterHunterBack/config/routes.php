@@ -41,12 +41,12 @@ $router->map("GET", "/previous/monster/[i:id]", function ($id) {
     $mainController = new MainController();
     $mainController->previousMonster($id);
 });
-
+/*
 $router->map("GET", "/random", function () {
 
     $mainController = new MainController();
     $mainController->getRandomMonster();
-});
+});*/
 /*
 $router->map("POST|GET","/signIn" ,function(){
 

@@ -1,6 +1,3 @@
-    Options Indexes FollowSymLinks
-    Require all granted
-    AllowOverride All
-    RewriteEngine on
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule . index.php [L]
+RewriteEngine On
+RewriteCond %{HTTP:Authorization} ^(.+)$
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]

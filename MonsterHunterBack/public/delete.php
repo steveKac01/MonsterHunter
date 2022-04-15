@@ -17,7 +17,6 @@ if (isset($headers["Authorization"])) {
     if(TokenA:: checkIsAdmin($headers["Authorization"],NOT_SO_SECRET_KEY)){
 
 
-
 $data = json_decode(file_get_contents('php://input'), true);
 
 $test = filter_var($data["id"],FILTER_VALIDATE_INT);

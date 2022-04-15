@@ -121,7 +121,7 @@ nav a.router-link-exact-active {
 .intro {
   background-color: #009879;
   padding: 3% 2%;
-
+  text-align: left;
 }
 
 .login {

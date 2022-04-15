@@ -136,7 +136,7 @@ data: () => ({
 
     if (this.monsterId != undefined) {
       let monster = await axios.get(
-        "http://localhost:15000/monster/" + this.monsterId
+        "http://dhqm1449.odns.fr/steve/MonsterHunterBack/public/detail.php?id=" + this.monsterId
 
       );
       console.log(monster)
