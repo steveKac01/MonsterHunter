@@ -41,7 +41,8 @@ export default {
 async nextMonster()
 {
 let test = await axios.get(
-      "http://localhost:15000/next/monster/" + this.monster.id
+       
+      "http://dhqm1449.odns.fr/steve/MonsterHunterBack/public/nextmonster.php?id=" + this.monster.id
     );
     this.monster = test.data;
 
@@ -49,7 +50,7 @@ let test = await axios.get(
 async previousMonster()
 {
 let test = await axios.get(
-      "http://localhost:15000/previous/monster/" + this.monster.id
+      "http://dhqm1449.odns.fr/steve/MonsterHunterBack/public/previousmonster.php?id=" + this.monster.id
     );
     this.monster = test.data;
 console.log(this.monster)

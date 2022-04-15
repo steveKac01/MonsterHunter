@@ -139,7 +139,7 @@ data: () => ({
         "http://dhqm1449.odns.fr/steve/MonsterHunterBack/public/detail.php?id=" + this.monsterId
 
       );
-      console.log(monster)
+    
 
       this.monster = monster.data;
       this.form.id = this.monster.id;
