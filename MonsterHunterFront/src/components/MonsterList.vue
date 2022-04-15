@@ -96,7 +96,7 @@ export default {
       } else {
 
         this.monsters = this.monstera.data.filter((elem) => {
-          return (elem.agro === 0)
+          return (elem.agro == 0)
         })
 
       }
@@ -178,7 +178,7 @@ export default {
     },
     async deleteMonster(monster) {
       let header = { "Authorization": localStorage.getItem('token') };
-      await axios.post("http://localhost:15000/delete.php", { id: monster }, { headers: header }) //FU alto router
+      await axios.post("http://dhqm1449.odns.fr/steve/MonsterHunterBack/public/delete.php", { id: monster }, { headers: header }) //FU alto router
 
       this.$router.go() //reload the page
     }
@@ -187,9 +187,9 @@ export default {
 
     if (this.displayAdmin) {
       let header = { "Authorization": localStorage.getItem('token') };
-      this.monstera = await axios.get("http://localhost:15000/monsters.php", { headers: header });
+      this.monstera = await axios.get("http://dhqm1449.odns.fr/steve/MonsterHunterBack/public/monsters.php", { headers: header });
     } else {
-      this.monstera = await axios.get("http://localhost:15000/monsters.php");
+      this.monstera = await axios.get("http://dhqm1449.odns.fr/steve/MonsterHunterBack/public/monsters.php");
     }
 
     if (this.monstera.data != "") {

@@ -21,16 +21,17 @@ create table User(
 id int primary key auto_increment unique,
 username varchar(100) not null,
 password varchar(150) not null,
-email varchar(150) not null unique
+email varchar(150) not null unique,
+isAdmin bool not null
 )ENGINE = InnoDB charset = UTF8MB4;
 
 ## -------------------[DATA]
 
-insert into User values("","steve","123","steve@aol.fr");
-insert into User values("","gabz","123","gabz@aol.fr");
+insert into User values("","steve","123","steve@aol.fr","1");
+insert into User values("","gabz","123","gabz@aol.fr","1");
 use monsterhunter;
 select * from user;
-delete from user where id=7;
+delete from user where id=3;
 
 insert into monster values("","Nergigante","Dragon destructeur","Le Nergigante est un Dragon ancien qui arbore une très grosse armure d'écailles brunes et beiges et de pics saillants, avec des teintes de rose sur le dessous de son corps. Son apparence générale évoque la brutalité.
 Armé de griffes acérées, d'un museau court bardé de crocs grossiers et d'une imense paire de cornes, il compte sur sa sauvagerie et son extraordinaire force pour combattre. Son corps est recouvert de pics -même sur ses ailes- qu'il peut projetter et faire repousser. Ces pointes blanches noircissent avec le temps et deviennent plus dures, protégeant alors le Nergigante plus efficacement et infligeant des blessures plus profondes lorsqu'éjectées."

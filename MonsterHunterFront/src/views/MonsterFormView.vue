@@ -119,13 +119,13 @@ data: () => ({
     async sendMonster() {
       if (this.monsterId != undefined) {
         let header = { "Authorization": localStorage.getItem('token') };
-        await axios.put("http://localhost:15000/edit.php", this.form, { headers: header }) //FU alto router
+        await axios.put("http://dhqm1449.odns.fr/steve/MonsterHunterBack/public/edit.php", this.form, { headers: header }) //FU alto router
 
         this.$router.push({ name: 'detail', params: { id: this.monsterId } })
       } else {
         let header = { "Authorization": localStorage.getItem('token') };
 
-        await axios.post("http://localhost:15000/insert.php", this.form, { headers: header }) //FU alto router
+        await axios.post("http://dhqm1449.odns.fr/steve/MonsterHunterBack/public/insert.php", this.form, { headers: header }) //FU alto router
         this.$router.push({ name: 'list' })
       }
     }

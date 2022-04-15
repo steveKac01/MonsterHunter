@@ -63,7 +63,7 @@ export default {
             {
 
              console.log("Ok submit")
-             const test = await axios.post("http://localhost:15000/signUp.php", this.form)
+             const test = await axios.post("http://dhqm1449.odns.fr/steve/MonsterHunterBack/public/signUp.php", this.form)
              //wait the server responses if the username is(no time for that !)
              //all good
              this.$router.push({name:"login"})

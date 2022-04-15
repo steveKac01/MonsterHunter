@@ -39,7 +39,7 @@ return "http://triathlondegerardmer.com/wp-content/uploads/2019/02/no-image.jpg"
     }
 },
 async created(){
-const dataMonsters = await axios.get("http://localhost:15000/random");
+const dataMonsters = await axios.get("http://dhqm1449.odns.fr/steve/MonsterHunterBack/public/random.php");
     this.monsters = dataMonsters.data;
    
 }

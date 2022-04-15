@@ -28,7 +28,7 @@ class Database extends PDO
         parent::__construct(
             $dsn,
             $config["username"],
-            "",
+            "McSU2VaSTMEO",
             [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
         );
     }
